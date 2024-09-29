@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahkeme Çağrısı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e0ffe0;
+            border: 1px solid #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mahkeme Çağrısı</h1>
+        <form id="courtForm">
+            <input type="text" id="name" placeholder="İsminizi ve Soyisminizi Girin" required>
+            <input type="submit" value="Gönder">
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('courtForm').onsubmit = function(event) {
+            event.preventDefault();
+            var name = document.getElementById('name').value;
+            var resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h2>Sayın ${name},</h2>
+                <p>Kuzey Kıbrıs Türk Cumhuriyeti Lefkoşa Asliye Hukuk Mahkemesi’ne başvuruda bulunmuş olduğunuz bildirilmektedir.</p>
+                <p>Dava dosyası numaranız: <strong>2024/12345</strong></p>
+                <p>Gereken tüm evrakların mahkemeye en kısa sürede iletilmesi gerekmektedir.</p>
+                <p>İyi günler dileriz!</p>
+            `;
+            resultDiv.style.display = 'block';
+        };
+    </script>
+</body>
+</html>
