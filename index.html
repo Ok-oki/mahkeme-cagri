@@ -3,30 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Okay'ın Sağlık ve Aşk Menüsü</title>
+  <title>Okay'ın Özürlü Aşk Menüsü</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       background: #ffe8ec;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
-    }
-    .menu-container {
-      background: #fff0f4;
-      padding: 20px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      width: 320px;
-      text-align: center;
       color: #d2004c;
     }
-    h1 {
-      margin-bottom: 25px;
-      font-weight: bold;
+
+    .giris-container, .menu-container {
+      background: #fff0f4;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 350px;
+      display: none;
     }
+
+    .giris-container.active, .menu-container.active {
+      display: block;
+    }
+
+    h1 {
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    .start-button, button {
+      background: #d2004c;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .start-button:hover, button:hover {
+      background: #a6003a;
+    }
+
     select {
       width: 100%;
       padding: 10px;
@@ -37,35 +67,34 @@
       color: #d2004c;
       background: #fff0f4;
       appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
       cursor: pointer;
     }
-    button {
-      background: #d2004c;
-      color: white;
-      border: none;
-      padding: 12px 0;
-      width: 100%;
-      font-size: 18px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-    button:hover {
-      background: #a6003a;
-    }
+
     .result {
       margin-top: 15px;
       font-weight: bold;
       color: #d2004c;
       min-height: 1.2em;
     }
+
+    .countdown {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <div class="menu-container">
+
+  <!-- Giriş Mesajı -->
+  <div class="giris-container active" id="giris">
+    <h1>Seni Bekletmiş Olabilirim...</h1>
+    <p>Bu kadar beklettiğim için üzgünüm, ama inanki bu menüyü senin için en güzel hale getirmeye çalıştım.❤️</p>
+    <button class="start-button" onclick="startLove()">AŞK İÇİN TIKLA ❤️</button>
+  </div>
+
+  <!-- Menü ve Sayaç -->
+  <div class="menu-container" id="menu">
     <h1>Okay'ın Sağlık ve Aşk Menüsü</h1>
     <label for="food">Bugün ne yedin?</label>
     <select id="food">
@@ -75,6 +104,7 @@
       <option value="Salata">Salata</option>
       <option value="Tatlı">Tatlı</option>
     </select>
+
     <label for="drink">Bugün ne içtin?</label>
     <select id="drink">
       <option value="">Seçiniz</option>
@@ -83,11 +113,54 @@
       <option value="Çay">Çay</option>
       <option value="Meyve suyu">Meyve suyu</option>
     </select>
+
     <button onclick="showStatus()">Durumu Göster</button>
     <div class="result" id="result"></div>
+
+    <div class="countdown" id="countdown"></div>
   </div>
 
   <script>
+    function startLove() {
+      document.getElementById('giris').classList.remove('active');
+      document.getElementById('menu').classList.add('active');
+    }
+
     function showStatus() {
       const food = document.getElementById('food').value;
-      const drink = document.g
+      const drink = document.getElementById('drink').value;
+      const result = document.getElementById('result');
+
+      if (!food || !drink) {
+        result.textContent = "Lütfen her iki alanı da seçiniz.";
+        return;
+      }
+
+      result.textContent = `Bugün ${food} yedin ve ${drink} içtin. Sağlıklı günler! ❤️`;
+    }
+
+    // Sayaç
+    function updateCountdown() {
+      const countdown = document.getElementById('countdown');
+      const targetDate = new Date('2025-05-20T00:00:00').getTime();
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdown.textContent = "Kavuşma zamanı geldi! 💕";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.textContent = `Kavuşmamıza ${days} gün, ${hours} saat, ${minutes} dakika, ${seconds} saniye kaldı. 💞`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
