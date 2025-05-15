@@ -1,131 +1,106 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahkeme Çağrısı</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        input[type="text"], input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .result {
-            display: none;
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e0ffe0;
-            border: 1px solid #4caf50;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Okay'ın Sağlık ve Aşk Menüsü</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffe8ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .menu-container {
+      background: #fff0f4;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 320px;
+      text-align: center;
+      color: #d2004c;
+    }
+    h1 {
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px 0;
+      border: 2px solid #d2004c;
+      border-radius: 5px;
+      font-size: 16px;
+      color: #d2004c;
+      background: #fff0f4;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+    }
+    button {
+      background: #d2004c;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      width: 100%;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #a6003a;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #d2004c;
+      min-height: 1.2em;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Mahkeme Çağrısı</h1>
-        <form id="courtForm">
-            <input type="text" id="name" placeholder="İsminizi ve Soyisminizi Girin" required>
-            <input type="submit" value="Gönder">
-        </form>
-        <div class="result" id="result"></div>
-    </div>
+  <div class="menu-container">
+    <h1>Okay'ın Sağlık ve Aşk Menüsü</h1>
+    <label for="food">Bugün ne yedin?</label>
+    <select id="food">
+      <option value="">Seçiniz</option>
+      <option value="Kahvaltı">Kahvaltı</option>
+      <option value="Pizza">Pizza</option>
+      <option value="Salata">Salata</option>
+      <option value="Tatlı">Tatlı</option>
+    </select>
+    <label for="drink">Bugün ne içtin?</label>
+    <select id="drink">
+      <option value="">Seçiniz</option>
+      <option value="Su">Su</option>
+      <option value="Kahve">Kahve</option>
+      <option value="Çay">Çay</option>
+      <option value="Meyve suyu">Meyve suyu</option>
+    </select>
+    <button onclick="showStatus()">Durumu Göster</button>
+    <div class="result" id="result"></div>
+  </div>
 
-    <script>
-        document.getElementById('courtForm').onsubmit = function(event) {
-            event.preventDefault();
-            var name = document.getElementById('name').value;
-            var resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `
-                <h2>Sayın ${name},</h2>
-                <p>Kuzey Kıbrıs Türk Cumhuriyeti Lefkoşa Asliye Hukuk Mahkemesi’ne başvuruda bulunmuş olduğunuz bildirilmektedir.</p>
-                <p>Dava dosyası numaranız: <strong>2024/12345</strong></p>
-                <p>Gereken tüm evrakların mahkemeye en kısa sürede iletilmesi gerekmektedir.</p>
-                <p>İyi günler dileriz!</p>
-            `;
-            resultDiv.style.display = 'block';
-        };
-    </script>
+  <script>
+    function showStatus() {
+      const food = document.getElementById('food').value;
+      const drink = document.getElementById('drink').value;
+      const result = document.getElementById('result');
 
-    <header>
-        <h1>Web Sitesi Başlığı</h1>
-    </header>
+      if (!food || !drink) {
+        result.textContent = "Lütfen her iki alanı da seçiniz.";
+        return;
+      }
 
-    <nav>
-        <!-- Navigasyon menüsü -->
-    </nav>
-
-    <main>
-        <h2>Davayı Görüntüle</h2>
-        <h3>MAHKEME ÇAĞRISI</h3>
-        <p>Kuzey Kıbrıs Türk Cumhuriyeti Lefkoşa Asliye Hukuk Mahkemesi’ne</p>
-        <p>
-            DAVA DOSYASI NO: 2024/12345<br>
-            DAVACI: Okay Ok<br>
-            DAVALI: İlda Ceylan<br>
-            AVUKAT: OpenIV<br>
-        </p>
-        <h4>KONU:</h4>
-        <p>Duygusal İhmal ve İletişimsizlik Sonucu Manevi Zarar Nedeniyle Tazminat Talepli Dava</p>
-        
-        <h4>DAVA NEDENİ:</h4>
-        <p>
-            Davalının, 28/09/2024 tarihinde, davacıya karşı uzun süreli bir ilgisizlik göstermesi ve bu durumun ilişkide duygusal zarara yol açması sebebiyle manevi tazminat talebi ile dava açılmıştır. Ayrıca, davalının 23:43 saatinde “Uyuyorum” demesine karşın, 01:49’da çevrimiçi olduğu tespit edilmiş, fakat bu durumu davacıya bildirmemesi, sabah saatlerinde gönderilen sevgi dolu mesajlara hiçbir yanıt vermemesi de manevi zararın temel sebeplerindendir.
-        </p>
-        
-        <h4>OLAYLAR:</h4>
-        <ul>
-            <li>Davalı, 28/09/2024 tarihinde uzun süre davacıya karşı herhangi bir şekilde iletişim kurmamıştır.</li>
-            <li>Saat 23:43’te “Uyuyorum” beyanında bulunmasına rağmen, 29/09/2024 saat 01:49’da çevrimiçi olarak aktif görülmüştür.</li>
-            <li>Davacı, davalının çevrimiçi olduğunu fark edip ona hazırladığı romantik ortamı paylaşmak istemiştir, ancak davalı bu duruma kayıtsız kalmıştır.</li>
-            <li>Sabah davacıdan aldığı sevgi dolu mesajlara yanıt vermemiş ve konuyu davacının ilgisizliği olarak göstererek kapatmaya çalışmıştır.</li>
-        </ul>
-
-        <h4>HUKUKİ DAYANAKLAR:</h4>
-        <p>
-            4721 Sayılı Türk Medeni Kanunu ve ilgili mevzuat çerçevesinde, davalının davranışlarının ilişkide güven ve sorumluluğu ihlal ettiği, ayrıca manevi zarara sebebiyet verdiği değerlendirilmiştir. Bu nedenle, davacının manevi tazminat talebi hakkı doğmuştur.
-        </p>
-
-        <h4>SONUÇ VE TALEP:</h4>
-        <p>
-            Davanın kabulü halinde, davacının manevi zararını telafi edecek şu hakların tanınmasını talep ederiz:<br>
-            1. İlgili tüm durumlarda davacıya, müsait ortam sağlandığında davalıya "popişe şaplak" uygulama hakkı verilmesi,<br>
-            2. Ani gelişen dudak buluşması taleplerine karşı davalının itiraz edememesi,<br>
-            3. "Kucak dolusu sarılma" talebinde bulunulduğunda, davalının davacının kucağına anında gelmesi,<br>
-            4. Davacının davalıyı öperek bayıltması durumunda, bu eylem nedeniyle herhangi bir ceza veya davayla karşılaşmaması.<br>
-            Gereğini saygılarımızla arz ve talep ederiz.
-        </p>
-
-        <p>
-            Tarih: 29/09/2024<br>
-            Davacı: Okay Ok<br>
-            Avukatı: OpenIV<br>
-            Adres: [Adresin]<br>
-            İmza: ________
-        </p>
-    </main>
-
-    <footer>
-        <p>© 2024 Kuzey Kıbrıs Türk Cumhuriyeti</p>
-    </footer>
+      let message = `Bugün ${food} yedin ve ${drink} içtin. Sağlıklı günler! ❤️`;
+      result.textContent = message;
+    }
+  </script>
 </body>
 </html>
-
